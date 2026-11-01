@@ -1,25 +1,25 @@
-const CACHE = 'prumo-393c137b9ac4'
+const CACHE = 'prumo-cc26c5d2cb01'
 const PRECACHE = [
   "./",
-  "./assets/AjustesPagina-1T3pIJ8i.js",
-  "./assets/AntesDeGastarPagina-BCJUiUOn.js",
+  "./assets/AjustesPagina-DzqfYahV.js",
+  "./assets/AntesDeGastarPagina-tyqhTX_Z.js",
   "./assets/CampoControle-MbX0NCMh.js",
-  "./assets/CartoesPagina-DS7clVp5.js",
-  "./assets/FormLancamento-DZtnLz4H.js",
-  "./assets/ImportarPagina-04pXI-4S.js",
+  "./assets/CartoesPagina-BWkZnGVc.js",
+  "./assets/FormLancamento-CaLt7R4x.js",
+  "./assets/ImportarPagina-cksYxiy3.js",
   "./assets/NavegacaoMes-CJWetS-q.js",
-  "./assets/PlanoPagina-CCERqTUD.js",
-  "./assets/ResultadosDetalhados-N9lU79Zp.js",
-  "./assets/SaldosPagina-Iv1OicZ3.js",
+  "./assets/PlanoPagina-COqH5u7h.js",
+  "./assets/ResultadosDetalhados-tcsqdT1F.js",
+  "./assets/SaldosPagina-B45bgYRN.js",
   "./assets/SeloValidacaoTextos-BR5WvYkI.js",
   "./assets/SimuladorPagina-B-DytGAg.css",
-  "./assets/SimuladorPagina-rLCDJY_l.js",
-  "./assets/TotaisPagina-lT5OsVyB.js",
+  "./assets/SimuladorPagina-DW2KseVm.js",
+  "./assets/TotaisPagina-pDmTs4Wh.js",
   "./assets/backupLembrete-DDE3cJrX.js",
   "./assets/controle-BN3aGLo-.js",
   "./assets/controle-BXd3Kh0T.css",
   "./assets/diagnostico.worker-BJid57cd.js",
-  "./assets/index-C1d_l3iu.js",
+  "./assets/index-BGsKpq-s.js",
   "./assets/index-DcgL6WhF.css",
   "./assets/jsx-runtime-G0LVwMXR.js",
   "./assets/montecarlo.worker-Dm262AjB.js",
@@ -55,6 +55,9 @@ const podeArmazenarNoCache = function podeArmazenarNoCache(caminho, estaNoPrecac
 	const ehManifest = caminho.endsWith("/manifest.webmanifest");
 	return estaNoPrecache || caminho.startsWith("/assets/") || ehIcone || ehManifest;
 }
+const podeAtualizarIndiceDaNavegacao = function podeAtualizarIndiceDaNavegacao(respostaOk) {
+	return respostaOk;
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting()))
@@ -87,6 +90,9 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(requisicao)
         .then((resposta) => {
+          if (!podeAtualizarIndiceDaNavegacao(resposta.ok)) {
+            return caches.match('./index.html').then((armazenada) => armazenada || caches.match('./'))
+          }
           const copia = resposta.clone()
           caches.open(CACHE).then((cache) => cache.put('./index.html', copia))
           return resposta
