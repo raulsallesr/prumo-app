@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-G0LVwMXR.js";var t={versaoTextos:`2026-10-27`,validadoEm:null,validadoPor:null,referencia:null},n=e(),r=`Texto em revisão profissional pendente`;function i({validadoEm:e=t.validadoEm}){return e===null?(0,n.jsx)(`span`,{className:`selo-validacao-textos`,role:`status`,children:r}):null}export{i as t};
