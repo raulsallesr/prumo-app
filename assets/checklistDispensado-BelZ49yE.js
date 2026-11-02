@@ -1,0 +1,1 @@
+var e=`prumo:checklistDispensado`;function t(){try{return localStorage.getItem(e)===`1`}catch{return!1}}function n(){try{localStorage.setItem(e,`1`)}catch{}}function r(){try{localStorage.removeItem(e)}catch{}}export{t as n,r,n as t};
