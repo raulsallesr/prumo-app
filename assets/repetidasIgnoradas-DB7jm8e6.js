@@ -1,0 +1,1 @@
+var e=`prumo:repetidasIgnoradas`;function t(){try{let t=JSON.parse(localStorage.getItem(e)??`[]`);return Array.isArray(t)&&t.every(e=>typeof e==`string`)?t:[]}catch{return[]}}function n(n){try{let r=new Set(t());r.add(n),localStorage.setItem(e,JSON.stringify([...r]))}catch{}}function r(){try{localStorage.removeItem(e)}catch{}}export{t as n,r,n as t};
